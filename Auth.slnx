@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Auth.Tests/Auth.Tests.csproj" />
+  <Project Path="Auth/Auth.csproj" />
+  <Project Path="Base.Tests/Base.Tests.csproj" />
+  <Project Path="Base/Base.csproj" />
+</Solution>
