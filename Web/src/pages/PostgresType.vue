@@ -8,9 +8,9 @@
 <!-------------------------------------------------- template -------------------------------------------------->
 <template>
   <div>
-    <Card title="Login">
-      <Input label="Username" />
-      <Input label="Password" />
+    <Card title="Postgres Type">
+      <Input label="Byte Type" />
+      <Input label="Short Type" />
     </Card>
   </div>
 </template>

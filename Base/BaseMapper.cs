@@ -1,7 +1,29 @@
 namespace Zuhid.Base;
 
-public class BaseMapper<TSource, TDestination> where TDestination : new() {
-  public virtual TDestination Map(TSource model) {
+public class BaseMapper<TModel, TEntity>
+ where TModel : new()
+ where TEntity : new() {
+  public virtual TEntity GetEntity(TModel model) {
+    return GetObject<TModel, TEntity>(model);
+  }
+
+  public virtual TModel GetModel(TEntity entity) {
+    return GetObject<TEntity, TModel>(entity);
+  }
+
+  public List<TEntity> GetEntityList(List<TModel> modelList) {
+    return GetList<TModel, TEntity>(modelList);
+  }
+
+  public List<TModel> GetModelList(List<TEntity> entityList) {
+    return GetList<TEntity, TModel>(entityList);
+  }
+
+  private static TDestination GetObject<TSource, TDestination>(TSource model) where TDestination : new() {
+    if (typeof(TDestination).IsAssignableFrom(typeof(TSource))) {
+      return (TDestination)(object)model;
+    }
+
     var modelProperities = typeof(TSource).GetProperties();
     var entityProperities = typeof(TDestination).GetProperties();
     var entity = new TDestination();
@@ -14,9 +36,14 @@ public class BaseMapper<TSource, TDestination> where TDestination : new() {
     return entity;
   }
 
-  public virtual List<TDestination> MapList(List<TSource> modelList) {
-    var entityList = new List<TDestination>();
-    modelList.ForEach(model => entityList.Add(Map(model)));
-    return entityList;
+  private static List<TDestination> GetList<TSource, TDestination>(List<TSource> sourceList) where TDestination : new() {
+    if (typeof(TDestination).IsAssignableFrom(typeof(TSource))) {
+      return [.. sourceList.Cast<TDestination>()];
+    }
+    var modelList = new List<TDestination>();
+    sourceList.ForEach(source => modelList.Add(GetObject<TSource, TDestination>(source)));
+    return modelList;
   }
+
+
 }

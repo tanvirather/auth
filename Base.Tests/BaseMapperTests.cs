@@ -32,7 +32,7 @@ public class BaseMapperTests {
     };
 
     // Act
-    var result = mapper.Map(source);
+    var result = mapper.GetEntity(source);
 
     // Assert
     Assert.NotNull(result);
@@ -62,7 +62,7 @@ public class BaseMapperTests {
     };
 
     // Act
-    var result = mapper.Map(source);
+    var result = mapper.GetEntity(source);
 
     // Assert
     Assert.NotNull(result);
@@ -81,7 +81,7 @@ public class BaseMapperTests {
     };
 
     // Act
-    var result = mapper.Map(source);
+    var result = mapper.GetEntity(source);
 
     // Assert
     Assert.NotNull(result);
@@ -102,7 +102,7 @@ public class BaseMapperTests {
     }
 
     // Act
-    var result = mapper.MapList(sourceList);
+    var result = mapper.GetEntityList(sourceList);
 
     // Assert
     Assert.NotNull(result);
@@ -121,7 +121,7 @@ public class BaseMapperTests {
     var emptyList = new List<SourceModel>();
 
     // Act
-    var result = mapper.MapList(emptyList);
+    var result = mapper.GetEntityList(emptyList);
 
     // Assert
     Assert.NotNull(result);
@@ -154,7 +154,7 @@ public class BaseMapperTests {
     var source = new SourceModel { Id = id, Name = originalName };
 
     // Act
-    var result = customMapper.Map(source);
+    var result = customMapper.GetEntity(source);
 
     // Assert
     Assert.NotNull(result);
@@ -164,8 +164,8 @@ public class BaseMapperTests {
 
   // Custom mapper implementation for testing overrides
   private class CustomMapper : BaseMapper<SourceModel, DestinationModel> {
-    public override DestinationModel Map(SourceModel model) {
-      var result = base.Map(model);
+    public override DestinationModel GetEntity(SourceModel model) {
+      var result = base.GetEntity(model);
 
       // Custom mapping logic
       result.Name = $"Custom: {model.Name}";

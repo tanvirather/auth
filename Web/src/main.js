@@ -1,3 +1,4 @@
+import router from '@/router';
 import { createApp } from 'vue';
 import App from './App.vue';
 import './style.css';
@@ -12,5 +13,6 @@ function registerGlobalComponents(app) {
 
 const app = createApp(App);
 registerGlobalComponents(app)
+app.use(router);
 app.mount('#app');
 

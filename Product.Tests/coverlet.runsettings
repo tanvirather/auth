@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Include>[Zuhid.Product]*</Include>
+					<Exclude>[Zuhid.Product]*Migrations.*,[Zuhid.Product]*Program,[Zuhid.Product]*AppSetting</Exclude>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

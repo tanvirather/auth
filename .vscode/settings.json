@@ -20,7 +20,7 @@
     "**/node_modules": true,
     "**/obj": true,
     "**/package-lock.json": true,
-    "**/Properties": true,
+    "**/Properties": false,
     "License": true,
   },
   "files.watcherExclude": {

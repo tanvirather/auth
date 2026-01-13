@@ -7,5 +7,5 @@ using Zuhid.Base;
 namespace Zuhid.Auth.Controllers;
 
 public class UserController(UserRepository repository, UserMapper mapper) :
-  BaseController<UserRepository, UserMapper, AuthDbContext, UserModel, UserEntity>(repository, mapper) {
+  BaseCrudController<UserRepository, UserMapper, AuthDbContext, UserModel, UserEntity>(repository, mapper) {
 }

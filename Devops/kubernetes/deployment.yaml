@@ -1,0 +1,23 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment # deployment name
+  labels:
+    name: auth-deployment
+  namespace: zuhid-namespace # namespace
+spec:
+  replicas: 3 # number of replicas
+  selector:
+    matchLabels:
+      app: auth-deployment
+  template:
+    metadata:
+      labels:
+        app: auth-deployment
+    spec:
+      containers:
+      - name: auth-container
+        image: tzather/my-website:v1
+        ports:
+        - containerPort: 80

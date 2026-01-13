@@ -10,7 +10,9 @@ function setup() {
   minikube start # Starts a local Kubernetes cluster
   minikube addons enable metrics-server # Enable the Metrics Server Add-On
   minikube addons list # display addons
-  az acr login --name "zuhiddev.azurecr.io" # login to Azure Container Registry
+  minikube dashboard --port=39663 # Opens the Kubernetes dashboard in a browser
+  # minikube tunnel # http://127.0.0.1:3000
+  # az acr login --name "zuhiddev.azurecr.io" # login to Azure Container Registry
 }
 
 function namespace() {
@@ -22,8 +24,22 @@ function namespace() {
   kubectl config view --minify --output 'jsonpath={..namespace}' # Display the current namespace
 }
 
+function deployment() {
+  kubectl apply --filename kubernetes/deployment.yaml # Apply the file
+  kubectl get deployments # List all deployments
+  kubectl get pods # List all pods
+}
+
+function service() {
+  kubectl apply --filename kubernetes/service.yaml # Apply the file
+  kubectl get services # List all services
+  minikube service auth-service -n zuhid-namespace --url # Get the URL of the service
+}
+
 ################################################## exec ##################################################
 
 clear
 # setup
-namespace
+# namespace
+# deployment
+service

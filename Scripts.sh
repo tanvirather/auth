@@ -93,6 +93,9 @@ clear
 
 # recreate_database "Auth"
 # update_database "Auth"
+# recreate_database "Product"
+# update_database "Product"
 
 # run_test "Base.Tests"
-run_test "Auth.Tests"
+# run_test "Auth.Tests"
+# run_test "Product.Tests"
