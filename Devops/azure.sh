@@ -12,6 +12,13 @@ location="centralus"
 #   # az group create --name $RESOURCE_GROUP --location $LOCATION 1>/dev/null && echo "Resource group created : $RESOURCE_GROUP"
 # }
 
+delete_all_resource_groups(){
+  az group list --query "[].name" -o tsv | while IFS= read -r rg; do
+    # echo "Resource Group: $rg"
+    az group delete --name "$rg" --yes --no-wait
+  done
+}
+
 stop_services(){
   az webapp stop --resource-group auth-test-rg --name zuhid-auth-test
   az webapp stop --resource-group auth-prod-rg --name zuhid-auth-prod
@@ -60,7 +67,8 @@ function buildAndDeploy() {
 
 ################################################## exec ##################################################
 
-clear
+# clear
+# delete_all_resource_groups
 # az login
 # resource_groups
 # stop_services
@@ -70,5 +78,5 @@ clear
 # create_prod
 
 
-buildAndDeploy "zuhiddev.azurecr.io" "auth" "v1"
+# buildAndDeploy "zuhiddev.azurecr.io" "auth" "v1"
 

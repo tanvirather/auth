@@ -5,7 +5,7 @@ metadata:
   name: auth-deployment # deployment name
   labels:
     name: auth-deployment
-  namespace: zuhid-namespace # namespace
+  namespace: dev-namespace # namespace
 spec:
   replicas: 3 # number of replicas
   selector:
@@ -18,6 +18,13 @@ spec:
     spec:
       containers:
       - name: auth-container
-        image: tzather/my-website:v1
+        image: localhost:5000/auth:latest
         ports:
-        - containerPort: 80
+        - containerPort: 80 # container port
+        resources:
+          requests:
+            cpu: "100m"        # Reserve 0.1 CPU
+            memory: "128Mi"    # Reserve 128 MiB
+          limits:
+            cpu: "500m"        # Hard cap at 0.5 CPU
+            memory: "256Mi"    # Hard cap at 256 MiB
