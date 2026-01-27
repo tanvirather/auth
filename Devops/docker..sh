@@ -6,6 +6,7 @@ mysql_image="mysql:9.1.0"
 mailhog_image="mailhog/mailhog:latest"
 ollama_image="ollama/ollama"
 text_to_speech="ghcr.io/coqui-ai/tts-cpu"
+cosmos_image="mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest"
 
 ################################################## methods ##################################################
 
@@ -65,6 +66,17 @@ ollama_install(){
   # --volume ollama:/root/.ollama
 }
 
+cosmos_install(){
+  # https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=docker-linux%2Ccsharp&pivots=api-nosql
+  docker run --name cosmos --publish 8081:8081 --detach \
+    --env "COSMOS_ACCOUNT_NAME=cosmos" \
+    --env "COSMOS_ACCOUNT_KEY=cosmos_key" \
+    --env "COSMOS_DATABASE_NAME=cosmos_db" \
+    --env "COSMOS_COLLECTION_NAME=cosmos_collection" \
+    --env "COSMOS_PARTITION_KEY=partition_key" \
+    $cosmos_image
+}
+
 text_to_speech_install(){
   # open in http://localhost:5002
   docker container rm $text_to_speech
@@ -89,6 +101,7 @@ clear
 # mailhog_install
 # ollama_install
 # text_to_speech_install
+# cosmos_install
 
 display_all
 
